@@ -21,7 +21,7 @@ export default {
   name: 'hello',
   data () {
     return {
-      msg: 'Welcome, ming'
+      msg: 'Welcome to use nodeclub2'
     }
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="post">
+  <div>
     <div class="loading" v-if="loading">
       Loading...
     </div>
@@ -8,9 +8,8 @@
       {{ error }}
     </div>
 
-    <div v-if="post" class="content">
-      <h2>{{ post.title }}</h2>
-      <p>{{ post.content }}</p>
+    <div v-if="topics" class="content">
+      <p>{{ topics }}</p>
     </div>
   </div>
 </template>
@@ -21,7 +20,7 @@ export default {
   data () {
     return {
       loading: false,
-      post: null,
+      topics: null,
       error: null
     }
   },
@@ -36,15 +35,14 @@ export default {
   },
   methods: {
     fetchData () {
-      this.error = this.post = null
+      this.error = this.topics = null
       this.loading = true
-      // replace getPost with your data fetching util / API wrapper
-      $.get('https://cnodejs.org/api/v1/topic/' + '595fa527a4de5625080fe1b8', (d) => {
-        if (d && d.data) {
-          this.post = d.data
+      $.get('/api/topics', (data) => {
+        if (data) {
+          this.topics = data
           this.loading = false
         } else {
-          this.post = true
+          this.topics = true
         }
       })
     }
